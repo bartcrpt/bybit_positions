@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bybit Positions Monitor Settings</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body class="theme-dark">
+    <main class="options-shell">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Bybit Positions Monitor</p>
+          <h1>Настройки</h1>
+        </div>
+        <span id="saveState" class="status-pill">не сохранено</span>
+      </header>
+
+      <form id="settingsForm" class="settings-form">
+        <section class="section">
+          <h2>API</h2>
+          <div class="field">
+            <label for="apiKey">API Key</label>
+            <div class="secret-field">
+              <input id="apiKey" name="apiKey" type="password" autocomplete="off" spellcheck="false">
+              <button class="icon-button" type="button" data-toggle-secret="apiKey" aria-label="Показать API Key">◐</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="apiSecret">API Secret</label>
+            <div class="secret-field">
+              <input id="apiSecret" name="apiSecret" type="password" autocomplete="off" spellcheck="false">
+              <button class="icon-button" type="button" data-toggle-secret="apiSecret" aria-label="Показать API Secret">◐</button>
+            </div>
+          </div>
+
+          <p class="hint">Используйте read-only ключ без прав торговли и вывода средств.</p>
+        </section>
+
+        <section class="section">
+          <h2>Аккаунт и данные</h2>
+          <div class="field-grid">
+            <div class="field">
+              <label for="accountType">Тип аккаунта</label>
+              <select id="accountType" name="accountType">
+                <option value="UNIFIED">Unified Trading Account</option>
+                <option value="CONTRACT">Standard</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="refreshIntervalSeconds">Интервал автообновления</label>
+              <select id="refreshIntervalSeconds" name="refreshIntervalSeconds">
+                <option value="5">5 секунд</option>
+                <option value="10">10 секунд</option>
+                <option value="15">15 секунд</option>
+                <option value="30">30 секунд</option>
+                <option value="60">60 секунд</option>
+                <option value="manual">Только вручную</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="displayCurrency">Валюта отображения</label>
+              <input id="displayCurrency" name="displayCurrency" value="USDT" disabled>
+            </div>
+
+            <div class="field">
+              <label for="theme">Тема</label>
+              <select id="theme" name="theme">
+                <option value="dark">Тёмная</option>
+                <option value="light">Светлая</option>
+                <option value="system">Системная</option>
+              </select>
+            </div>
+          </div>
+
+          <fieldset class="field category-group">
+            <legend>Категория позиций</legend>
+            <label class="check-row">
+              <input id="categoryLinear" name="positionCategories" type="checkbox" value="linear">
+              <span>Linear (USDT Perpetual)</span>
+            </label>
+            <label class="check-row">
+              <input id="categoryInverse" name="positionCategories" type="checkbox" value="inverse">
+              <span>Inverse</span>
+            </label>
+          </fieldset>
+        </section>
+
+        <section class="section">
+          <h2>Уведомления</h2>
+          <label class="check-row check-row--wide">
+            <input id="notificationsEnabled" name="notificationsEnabled" type="checkbox">
+            <span>Включить уведомления</span>
+          </label>
+          <div class="field field--narrow">
+            <label for="liquidationAlertPercent">Порог до ликвидации, %</label>
+            <input id="liquidationAlertPercent" name="liquidationAlertPercent" type="number" min="0.1" max="100" step="0.1">
+          </div>
+        </section>
+
+        <p id="resultBanner" class="result-banner" hidden></p>
+
+        <div class="actions">
+          <button id="testConnectionButton" class="button" type="button">Проверить соединение</button>
+          <button id="saveSettingsButton" class="button button--primary" type="submit">Сохранить</button>
+        </div>
+      </form>
+    </main>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

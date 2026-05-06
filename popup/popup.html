@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bybit Positions Monitor</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body class="theme-dark">
+    <main class="popup-shell" aria-live="polite">
+      <section class="summary" aria-label="Общая сводка">
+        <div class="summary__top">
+          <div>
+            <span class="label">Equity</span>
+            <strong id="equityValue" class="summary__equity">—</strong>
+          </div>
+          <span id="connectionDot" class="connection-dot" title="Статус соединения"></span>
+        </div>
+
+        <div class="summary__pnl">
+          <span id="totalUnrealizedPnl">—</span>
+          <span id="totalUnrealizedPnlPercent" class="summary__percent">—</span>
+        </div>
+
+        <dl class="summary-grid">
+          <div>
+            <dt>Closed PnL сегодня</dt>
+            <dd id="closedPnlToday">—</dd>
+          </div>
+          <div>
+            <dt>Available</dt>
+            <dd id="availableBalance">—</dd>
+          </div>
+          <div>
+            <dt>Used Margin</dt>
+            <dd id="usedMargin">—</dd>
+          </div>
+        </dl>
+      </section>
+
+      <p id="noticeBanner" class="notice" hidden></p>
+
+      <section id="loadingState" class="state-block" aria-label="Загрузка">
+        <div class="skeleton skeleton--wide"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+      </section>
+
+      <section id="needsSettingsState" class="state-block state-block--center" hidden>
+        <div class="state-icon">⚿</div>
+        <h1>Настройте API-ключи</h1>
+        <p>Нужен read-only ключ Bybit для баланса и позиций.</p>
+        <button id="openSettingsButton" class="button button--primary" type="button">Открыть настройки</button>
+      </section>
+
+      <section id="errorState" class="state-block state-block--center" hidden>
+        <div class="state-icon state-icon--error">!</div>
+        <h1>Ошибка API</h1>
+        <p id="errorText">Не удалось загрузить данные.</p>
+        <button id="retryButton" class="button" type="button">Повторить</button>
+      </section>
+
+      <section id="emptyPositionsState" class="state-block state-block--center" hidden>
+        <div class="state-icon">0</div>
+        <h1>Нет открытых позиций</h1>
+      </section>
+
+      <section id="positionsList" class="positions" aria-label="Открытые позиции" hidden></section>
+    </main>
+
+    <footer class="bottom-bar">
+      <button id="refreshButton" class="icon-button" type="button" title="Обновить" aria-label="Обновить">↻</button>
+      <span id="lastUpdated" class="last-updated">не обновлялось</span>
+      <button id="optionsButton" class="icon-button" type="button" title="Настройки" aria-label="Настройки">⚙</button>
+    </footer>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
